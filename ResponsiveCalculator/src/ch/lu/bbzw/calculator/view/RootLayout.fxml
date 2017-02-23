@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane prefHeight="500.0" prefWidth="700.0" stylesheets="@../Material.css" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.lu.bbzw.calculator.view.RootLayoutController">
+   <top>
+      <MenuBar id="blackBackground" nodeOrientation="RIGHT_TO_LEFT" stylesheets="@../BlackBackground.css" BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#handleDefaultCalculator" text="Default Calculator" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleBinaryCalculator" text="Binary Calculator" />
+            </items>
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="1.0" pickOnBounds="true" preserveRatio="true" scaleX="25.0" scaleY="25.0">
+                     <image>
+                        <Image url="@../../../../../menu.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+</BorderPane>
