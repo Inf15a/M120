@@ -1,22 +1,22 @@
 package ch.lu.bbzw.calculator.view;
 
-import ch.lu.bbzw.calculator.MainApp;
+import ch.lu.bbzw.calculator.Calculator;
 import javafx.fxml.FXML;
 
 public class RootLayoutController {
-  private MainApp mainApp = null;
+  private Calculator calculator = null;
 
   @FXML
   private void handleDefaultCalculator() {
-    mainApp.showDefaultCalc();
+    calculator.showDefaultCalc();
   }
 
   @FXML
   private void handleBinaryCalculator() {
-    mainApp.showBinaryCalc();
+    calculator.showBinaryCalc();
   }
 
-  public void setMainApp(MainApp mainApp) {
-    this.mainApp = mainApp;
+  public void setMainApp(Calculator mainApp) {
+    this.calculator = mainApp;
   }
 }
