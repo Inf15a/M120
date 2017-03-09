@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="ResponsiveCalculator" default="do-deploy" basedir="." xmlns:fx="javafx:com.sun.javafx.tools.ant">
+<project name="ResponsiveCalculator" default="install" basedir="." xmlns:fx="javafx:com.sun.javafx.tools.ant">
+
+	<target name="install" depends="exe">
+		<exec executable="Inno Setup 5\iscc.exe">
+			<arg value="InnoSetup.iss"/>
+		</exec>
+	</target>
 	<target name="init-fx-tasks">
 		<path id="fxant">
 			<filelist>
@@ -11,13 +17,12 @@
 		<taskdef resource="com/sun/javafx/tools/ant/antlib.xml" uri="javafx:com.sun.javafx.tools.ant" classpathref="fxant" />
 	</target>
 
-
 	<target name="exe" depends="do-deploy">
 		<taskdef name="launch4j" classname="net.sf.launch4j.ant.Launch4jTask" classpath="launch4j/launch4j.jar
 			    :launch4j/lib/xstream.jar" />
 		<launch4j>
-			<config jar="dist/ResponsiveCalculator.jar" outfile="ResponsiveCalculator.exe" errTitle="ResponsiveCalculator" chdir="." icon="..\src\calculator.ico">
-				<singleInstance mutexName="net.sf.launch4j.example.ConsoleApp" />
+			<config jar="dist/ResponsiveCalculator.jar" outfile="out/ResponsiveCalculator.exe" errTitle="ResponsiveCalculator" chdir="." icon="..\src\calculator.ico">
+				
 				<jre minVersion="1.8.0" />
 			</config>
 		</launch4j>
@@ -97,7 +102,7 @@
 			<fx:fileset dir="dist" includes="libs/*" />
 		</fx:resources>
 
-		<fx:application id="fxApplication" name="" mainClass="ch.lu.bbzw.calculator.MainApp" />
+		<fx:application id="fxApplication" name="" mainClass="ch.lu.bbzw.calculator.Calculator" />
 
 		<mkdir dir="build/classes/META-INF" />
 
