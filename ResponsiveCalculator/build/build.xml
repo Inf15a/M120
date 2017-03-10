@@ -2,15 +2,15 @@
 <project name="ResponsiveCalculator" default="install" basedir="." xmlns:fx="javafx:com.sun.javafx.tools.ant">
 
 	<target name="install" depends="exe">
-		<exec executable="Inno Setup 5\iscc.exe">
+		<exec executable="Inno Setup 5/iscc.exe">
 			<arg value="InnoSetup.iss"/>
 		</exec>
 	</target>
 	<target name="init-fx-tasks">
 		<path id="fxant">
 			<filelist>
-				<file name="${java.home}\..\lib\ant-javafx.jar" />
-				<file name="${java.home}\lib\jfxrt.jar" />
+				<file name="${java.home}/../lib/ant-javafx.jar" />
+				<file name="${java.home}/lib/jfxrt.jar" />
 			</filelist>
 		</path>
 
@@ -18,14 +18,19 @@
 	</target>
 
 	<target name="exe" depends="do-deploy">
+		<exec executable="launch4j/launch4jc.exe">
+			<arg value="launch4jConfig.xml"/>
+		</exec>
+		<!-- 
 		<taskdef name="launch4j" classname="net.sf.launch4j.ant.Launch4jTask" classpath="launch4j/launch4j.jar
 			    :launch4j/lib/xstream.jar" />
 		<launch4j>
-			<config jar="dist/ResponsiveCalculator.jar" outfile="out/ResponsiveCalculator.exe" errTitle="ResponsiveCalculator" chdir="." icon="..\src\calculator.ico">
+			<config jar="dist/ResponsiveCalculator.jar" outfile="out/ResponsiveCalculator.exe" errTitle="ResponsiveCalculator" chdir="." icon="../src/calculator.ico">
 				
 				<jre minVersion="1.8.0" />
 			</config>
 		</launch4j>
+		-->
 	</target>
 
 	<target name="setup-staging-area">
@@ -38,7 +43,7 @@
 
 		<mkdir dir="project" />
 		<copy todir="project">
-			<fileset dir="..\..\ResponsiveCalculator">
+			<fileset dir="../../ResponsiveCalculator">
 				<include name="src/**" />
 			</fileset>
 		</copy>
