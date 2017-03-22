@@ -18,7 +18,7 @@
 <SplitPane dividerPositions="0.20261437908496732" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" orientation="VERTICAL" prefHeight="308.0" prefWidth="437.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.lu.bbzw.calculator.view.BinaryCalculatorController">
 	<HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
 		<children>
-			<TextField fx:id="txtOutput" prefHeight="25.0" prefWidth="200.0" />
+			<TextField fx:id="txtOutput" prefHeight="25.0" prefWidth="200.0" editable="true"/>
 		</children>
 	</HBox>
 	<BorderPane prefHeight="167.0" prefWidth="435.0">

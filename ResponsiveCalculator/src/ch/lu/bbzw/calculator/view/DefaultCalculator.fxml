@@ -11,7 +11,7 @@
    <items>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
          <children>
-            <TextField fx:id="txtOutput" prefHeight="25.0" prefWidth="200.0" editable="false"/>
+            <TextField fx:id="txtOutput" prefHeight="25.0" prefWidth="200.0" editable="true"/>
          </children>
       </HBox>
       <HBox prefHeight="100.0" prefWidth="200.0">

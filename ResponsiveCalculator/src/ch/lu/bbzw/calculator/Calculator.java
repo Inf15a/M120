@@ -14,72 +14,72 @@ import javafx.stage.Stage;
 
 public class Calculator extends Application {
 
-	private Stage primaryStage;
-	private BorderPane rootLayout;
+  private Stage primaryStage;
+  private BorderPane rootLayout;
 
-	@Override
-	public void start(Stage primaryStage) {
-		this.primaryStage = primaryStage;
-		this.primaryStage.getIcons().add(new Image("calculator.png"));
-		initRootLayout();
-		showDefaultCalc();
-	}
+  @Override
+  public void start(Stage primaryStage) {
+    this.primaryStage = primaryStage;
+    this.primaryStage.getIcons().add(new Image("calculator.png"));
+    initRootLayout();
+    showDefaultCalc();
+  }
 
-	public void showBinaryCalc() {
-		try {
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(this.getClass().getResource("view/BinaryCalculator.fxml"));
-			SplitPane splitPane = (SplitPane) loader.load();
+  public void showBinaryCalc() {
+    try {
+      FXMLLoader loader = new FXMLLoader();
+      loader.setLocation(this.getClass().getResource("view/BinaryCalculator.fxml"));
+      SplitPane splitPane = (SplitPane) loader.load();
 
-			rootLayout.setCenter(splitPane);
+      rootLayout.setCenter(splitPane);
 
-		} catch (IOException e) {
-			e.printStackTrace();
-			// while runtime there have to be the right file
-		}
+    } catch (IOException e) {
+      e.printStackTrace();
+      // while runtime there have to be the right file
+    }
 
-	}
+  }
 
-	public void showDefaultCalc() {
-		try {
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(this.getClass().getResource("view/DefaultCalculator.fxml"));
-			SplitPane splitPane = (SplitPane) loader.load();
+  public void showDefaultCalc() {
+    try {
+      FXMLLoader loader = new FXMLLoader();
+      loader.setLocation(this.getClass().getResource("view/DefaultCalculator.fxml"));
+      SplitPane splitPane = (SplitPane) loader.load();
 
-			rootLayout.setCenter(splitPane);
+      rootLayout.setCenter(splitPane);
 
-		} catch (IOException e) {
-			e.printStackTrace();
-			// while runtime there have to be the right file
-		}
-	}
+    } catch (IOException e) {
+      e.printStackTrace();
+      // while runtime there have to be the right file
+    }
+  }
 
-	private void initRootLayout() {
-		try {
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(this.getClass().getResource("view/RootLayout.fxml"));
-			rootLayout = (BorderPane) loader.load();
+  private void initRootLayout() {
+    try {
+      FXMLLoader loader = new FXMLLoader();
+      loader.setLocation(this.getClass().getResource("view/RootLayout.fxml"));
+      rootLayout = (BorderPane) loader.load();
 
-			RootLayoutController controller = (RootLayoutController) loader.getController();
-			controller.setMainApp(this);
+      RootLayoutController controller = (RootLayoutController) loader.getController();
+      controller.setMainApp(this);
 
-			Scene scene = new Scene(rootLayout);
-			primaryStage.setScene(scene);
-			primaryStage.show();
-		} catch (IOException e) {
-			// while runtime there have to be the right file
-		}
-	}
+      Scene scene = new Scene(rootLayout);
+      primaryStage.setScene(scene);
+      primaryStage.show();
+    } catch (IOException e) {
+      // while runtime there have to be the right file
+    }
+  }
 
-	public void changeStylesheet(StyleType styleType) {
+  public void changeStylesheet(StyleType styleType) {
 
-		rootLayout.getStylesheets().clear();
-		if (styleType == StyleType.MATERIAL) {
-			rootLayout.getStylesheets().add(getClass().getResource("Material.css").toString());
-		}
-	}
+    rootLayout.getStylesheets().clear();
+    if (styleType == StyleType.MATERIAL) {
+      rootLayout.getStylesheets().add(getClass().getResource("Material.css").toString());
+    }
+  }
 
-	public static void main(String[] args) {
-		launch(args);
-	}
+  public static void main(String[] args) {
+    launch(args);
+  }
 }
