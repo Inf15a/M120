@@ -47,14 +47,7 @@ public class DefaultCalculatorController {
 			}
 		});
 
-		txtOutput.textProperty().addListener(new ChangeListener<String>() {
-			@Override
-			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-				if (!newValue.matches("[0-9]{0,}\\.{0,1}[0-9]{0,}")) {
-					txtOutput.setText(oldValue);
-				}
-			}
-		});
+		txtOutputTextPropertyChangeListener();
 		calculatorInputField.addButtonActionListener("0", this::handle0);
 		calculatorInputField.addButtonActionListener("1", () -> txtOutput.setText(txtOutput.getText() + "1"));
 		calculatorInputField.addButtonActionListener("2", () -> txtOutput.setText(txtOutput.getText() + "2"));
@@ -76,6 +69,18 @@ public class DefaultCalculatorController {
 		calculatorOperationsField.addButtonActionListener("=", this::handleEqual);
 
 		init();
+	}
+
+		
+	protected void txtOutputTextPropertyChangeListener() {
+		txtOutput.textProperty().addListener(new ChangeListener<String>() {
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				if (!newValue.matches("[0-9]{0,}\\.{0,1}[0-9]{0,}")) {
+					txtOutput.setText(oldValue);
+				}
+			}
+		});
 	}
 
 	protected void init() {

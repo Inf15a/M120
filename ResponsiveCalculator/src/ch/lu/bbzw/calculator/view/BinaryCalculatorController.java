@@ -2,8 +2,11 @@ package ch.lu.bbzw.calculator.view;
 
 import ch.lu.bbzw.calculator.utils.NumeralSystemConverterForStrings;
 import ch.lu.bbzw.calculator.utils.OutputChoice;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
@@ -19,6 +22,23 @@ public class BinaryCalculatorController extends DefaultCalculatorController {
 	private RadioButton binaryChoice;
 	private OutputChoice choice = OutputChoice.DECIMAL;
 
+	private ChangeListener<String> changeListenerBinary = new ChangeListener<String>() {
+		@Override
+		public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+			if (!newValue.matches("[0-1]{0,}")) {
+				txtOutput.setText(oldValue);
+			}
+		}
+	};
+	private ChangeListener<String> changeListenerDecimal = new ChangeListener<String>() {
+		@Override
+		public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+			if (!newValue.matches("[0-9]{0,}")) {
+				txtOutput.setText(oldValue);
+			}
+		}
+	};
+
 	@Override
 	public void init() {
 		for (int i = 0; i < binaryButtons.getChildren().size(); i++) {
@@ -33,6 +53,16 @@ public class BinaryCalculatorController extends DefaultCalculatorController {
 		});
 
 		txtOutput.setOnAction(event -> createBinaryButtonOutput());
+	}
+
+	@Override
+	protected void txtOutputTextPropertyChangeListener() {
+		if (choice == OutputChoice.DECIMAL) {
+			txtOutput.textProperty().addListener(changeListenerDecimal);
+		} else {
+
+			txtOutput.textProperty().addListener(changeListenerBinary);
+		}
 	}
 
 	@Override
@@ -87,6 +117,10 @@ public class BinaryCalculatorController extends DefaultCalculatorController {
 				// nothing has to be done, txtoutput is empty
 			}
 		}
+		txtOutput.textProperty().removeListener(changeListenerBinary);
+		txtOutput.textProperty().removeListener(changeListenerDecimal);
+		txtOutputTextPropertyChangeListener();
+		// txtOutput.removeEventFilter(new E, eventFilter); TODO finish
 	}
 
 	private void setDisabledToTextField2To9(boolean disabled) {
