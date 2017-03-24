@@ -1,1 +1,13 @@
 /bin/
+/Game$1.class
+/Game$GameOverListener.class
+/Game.class
+/Move$1.class
+/Move$2.class
+/Move$MoveEndListener.class
+/Move.class
+/Test.class
+/TetrisField.class
+/TetrisPane.class
+/Tick$TickEndListener.class
+/Tick.class
