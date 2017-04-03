@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="ResponsiveCalculator" default="install" basedir="." xmlns:fx="javafx:com.sun.javafx.tools.ant">
+	<property name="out" value="./out">
+	</property>
 
 	<target name="install" depends="exe">
 		<exec executable="Inno Setup 5/iscc.exe">
-			<arg value="InnoSetup.iss"/>
+			<arg value="InnoSetup.iss" />
 		</exec>
 	</target>
 	<target name="init-fx-tasks">
@@ -13,13 +15,12 @@
 				<file name="${java.home}/lib/jfxrt.jar" />
 			</filelist>
 		</path>
-
 		<taskdef resource="com/sun/javafx/tools/ant/antlib.xml" uri="javafx:com.sun.javafx.tools.ant" classpathref="fxant" />
 	</target>
 
 	<target name="exe" depends="do-deploy">
 		<exec executable="launch4j/launch4jc.exe">
-			<arg value="launch4jConfig.xml"/>
+			<arg value="launch4jConfig.xml" />
 		</exec>
 		<!-- 
 		<taskdef name="launch4j" classname="net.sf.launch4j.ant.Launch4jTask" classpath="launch4j/launch4j.jar
@@ -34,54 +35,55 @@
 	</target>
 
 	<target name="setup-staging-area">
-		<delete dir="externalLibs" />
-		<delete dir="project" />
-		<delete dir="projectRefs" />
+		<delete dir="${out}/externalLibs" />
+		<delete dir="${out}/project" />
+		<delete dir="${out}/projectRefs" />
 
-		<mkdir dir="externalLibs" />
+		<mkdir dir="${out}/externalLibs" />
 
 
-		<mkdir dir="project" />
-		<copy todir="project">
+		<mkdir dir="${out}/project" />
+		<copy todir="${out}/project">
 			<fileset dir="../../ResponsiveCalculator">
 				<include name="src/**" />
 			</fileset>
 		</copy>
 
-		<mkdir dir="projectRefs" />
+		<mkdir dir="${out}/projectRefs" />
 	</target>
+
 	<target name='do-compile'>
-		<delete dir="build" />
-		<mkdir dir="build/src" />
-		<mkdir dir="build/libs" />
-		<mkdir dir="build/classes" />
+		<delete dir="${out}/build" />
+		<mkdir dir="${out}/build/src" />
+		<mkdir dir="${out}/build/libs" />
+		<mkdir dir="${out}/build/classes" />
 
 		<!-- Copy project-libs references -->
-		<copy todir="build/libs">
-			<fileset dir="externalLibs">
+		<copy todir="${out}/build/libs">
+			<fileset dir="${out}/externalLibs">
 			</fileset>
 		</copy>
 
 		<!-- Copy project references -->
 
 		<!-- Copy project sources itself -->
-		<copy todir="build/src">
-			<fileset dir="project/src">
+		<copy todir="${out}/build/src">
+			<fileset dir="${out}/project/src">
 				<include name="**/*" />
 			</fileset>
 		</copy>
 
-		<javac includeantruntime="false" source="1.8" target="1.8" srcdir="build/src" destdir="build/classes" encoding="Cp1252">
+		<javac includeantruntime="false" source="1.8" target="1.8" srcdir="${out}/build/src" destdir="${out}/build/classes" encoding="Cp1252">
 			<classpath>
-				<fileset dir="build/libs">
+				<fileset dir="${out}/build/libs">
 					<include name="*" />
 				</fileset>
 			</classpath>
 		</javac>
 
 		<!-- Copy over none Java-Files -->
-		<copy todir="build/classes">
-			<fileset dir="project/src">
+		<copy todir="${out}/build/classes">
+			<fileset dir="${out}/project/src">
 				<exclude name="**/*.java" />
 			</fileset>
 		</copy>
@@ -89,33 +91,33 @@
 
 	</target>
 	<target name="do-deploy" depends="setup-staging-area, do-compile, init-fx-tasks">
-		<delete file="dist" />
-		<delete file="deploy" />
+		<delete file="${out}/dist" />
+		<delete file="${out}/deploy" />
 
-		<mkdir dir="dist" />
-		<mkdir dir="dist/libs" />
+		<mkdir dir="${out}/dist" />
+		<mkdir dir="${out}/dist/libs" />
 
-		<copy todir="dist/libs">
-			<fileset dir="externalLibs">
+		<copy todir="${out}/dist/libs">
+			<fileset dir="${out}/externalLibs">
 				<include name="*" />
 			</fileset>
 		</copy>
 
 
 		<fx:resources id="appRes">
-			<fx:fileset dir="dist" includes="ResponsiveCalculator.jar" />
-			<fx:fileset dir="dist" includes="libs/*" />
+			<fx:fileset dir="${out}/dist" includes="ResponsiveCalculator.jar" />
+			<fx:fileset dir="${out}/dist" includes="libs/*" />
 		</fx:resources>
 
 		<fx:application id="fxApplication" name="" mainClass="ch.lu.bbzw.calculator.Calculator" />
 
-		<mkdir dir="build/classes/META-INF" />
+		<mkdir dir="${out}/build/classes/META-INF" />
 
 
 
-		<fx:jar destfile="dist/ResponsiveCalculator.jar">
+		<fx:jar destfile="${out}/dist/ResponsiveCalculator.jar">
 			<fx:application refid="fxApplication" />
-			<fileset dir="build/classes">
+			<fileset dir="${out}/build/classes">
 			</fileset>
 			<fx:resources refid="appRes" />
 

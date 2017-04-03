@@ -1,9 +1,0 @@
-#BinaryButtons .button{
-	-fx-background-radius: 0;
-	-fx-padding: 0;
-	-fx-border-insets: 0;
-	-fx-background-color: rgb(47,52,57); 
-}
-#BinaryButtons{
-	-fx-background-color: rgb(47,52,57);
-}
